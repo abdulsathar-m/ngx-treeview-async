@@ -1,7 +1,7 @@
 <ng-template #defaultItemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand"
   let-onCheckedChange="onCheckedChange">
   <div class="form-inline row-item">
-    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" [ngSwitch]="item.collapsed">
+    <i *ngIf="item.children || item.loadChildrenAsync" (click)="onCollapseExpand()" aria-hidden="true" [ngSwitch]="item.collapsed">
       <svg *ngSwitchCase="true" width="0.8rem" height="0.8rem" viewBox="0 0 16 16" class="bi bi-caret-right-fill"
         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -75,7 +75,8 @@
 <div [ngSwitch]="hasFilterItems">
   <div *ngSwitchCase="true" class="treeview-container" [style.max-height.px]="maxHeight">
     <ngx-treeview-item *ngFor="let item of filterItems" [config]="config" [item]="item"
-      [template]="itemTemplate || defaultItemTemplate" (checkedChange)="onItemCheckedChange(item, $event)">
+      [template]="itemTemplate || defaultItemTemplate" (checkedChange)="onItemCheckedChange(item, $event)"
+      [loadChildren]="loadChildren">
     </ngx-treeview-item>
   </div>
   <div *ngSwitchCase="false" class="treeview-text">

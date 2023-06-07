@@ -6,6 +6,7 @@ import { CityComponent } from './city/city.component';
 import { RoomComponent } from './room/room.component';
 import { DropdownTreeviewSelectDemoComponent } from './dropdown-treeview-select/dropdown-treeview-select-demo.component';
 import { ProductComponent } from './product/product.component';
+import { AsyncDataComponent } from './async-data/async-data.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'components', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'performance', component: RoomComponent },
   { path: 'template', component: DropdownTreeviewSelectDemoComponent },
   { path: 'advanced', component: ProductComponent },
+  { path: 'asyncLoad', component: AsyncDataComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

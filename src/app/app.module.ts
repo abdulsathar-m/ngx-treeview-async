@@ -6,6 +6,7 @@ import { TreeviewModule } from 'ngx-treeview';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BookComponent } from './book/book.component';
+import { AsyncDataComponent } from './async-data/async-data.component';
 import { CityComponent } from './city/city.component';
 import { RoomComponent } from './room/room.component';
 import { ProductComponent } from './product/product.component';
@@ -29,6 +30,7 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
     CityComponent,
     RoomComponent,
     ProductComponent,
+    AsyncDataComponent,
     AppComponent,
     DisabledOnSelectorDirective
   ],

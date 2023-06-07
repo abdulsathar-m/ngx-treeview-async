@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { isNil } from 'lodash';
 import { TreeviewItem } from '../../models/treeview-item';
 import { TreeviewConfig } from '../../models/treeview-config';
@@ -13,7 +13,10 @@ export class TreeviewItemComponent {
   @Input() config: TreeviewConfig;
   @Input() template: TemplateRef<TreeviewItemTemplateContext>;
   @Input() item: TreeviewItem;
+  @Input() loadChildren: (item: TreeviewItem) => Promise<TreeviewItem[]>;
   @Output() checkedChange = new EventEmitter<boolean>();
+
+  isLoadingChildren = false;
 
   constructor(
     private defaultConfig: TreeviewConfig
@@ -21,8 +24,20 @@ export class TreeviewItemComponent {
     this.config = this.defaultConfig;
   }
 
-  onCollapseExpand = () => {
+  onCollapseExpand = async () => {
+    if (this.isLoadingChildren) return;
     this.item.collapsed = !this.item.collapsed;
+    try {
+      if (!this.item.children && this.item.loadChildrenAsync && this.loadChildren) {
+        this.isLoadingChildren = true;
+        this.item.children = await this.loadChildren(this.item);
+        this.isLoadingChildren = false;
+      }
+    } catch (error) {
+      console.error(error);
+      this.item.children = [];
+      this.isLoadingChildren = false;
+    }
   }
 
   onCheckedChange = () => {

@@ -52,6 +52,7 @@ export class TreeviewComponent implements OnChanges, OnInit {
   @Input() itemTemplate: TemplateRef<TreeviewItemTemplateContext>;
   @Input() items: TreeviewItem[];
   @Input() config: TreeviewConfig;
+  @Input() loadChildren: (item: TreeviewItem) => Promise<TreeviewItem[]>;
   @Output() selectedChange = new EventEmitter<any[]>();
   @Output() filterChange = new EventEmitter<string>();
   headerTemplateContext: TreeviewHeaderTemplateContext;

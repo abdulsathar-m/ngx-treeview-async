@@ -13,6 +13,7 @@ export interface TreeItem {
   checked?: boolean;
   collapsed?: boolean;
   children?: TreeItem[];
+  loadChildrenAsync?: boolean;
 }
 
 export class TreeviewItem {
@@ -20,6 +21,7 @@ export class TreeviewItem {
   private internalChecked = true;
   private internalCollapsed = false;
   private internalChildren: TreeviewItem[];
+  loadChildrenAsync = false;
   text: string;
   value: any;
 
@@ -42,6 +44,9 @@ export class TreeviewItem {
     if (isBoolean(item.disabled)) {
       this.disabled = item.disabled;
     }
+    if (isBoolean(item.loadChildrenAsync)) {
+      this.loadChildrenAsync = item.loadChildrenAsync;
+    }
     if (!isNil(item.children) && item.children.length > 0) {
       this.children = item.children.map(child => {
         if (this.disabled === true) {
@@ -50,6 +55,8 @@ export class TreeviewItem {
 
         return new TreeviewItem(child);
       });
+    } else if(item.loadChildrenAsync) {
+      this.collapsed = true;
     }
 
     if (autoCorrectChecked) {

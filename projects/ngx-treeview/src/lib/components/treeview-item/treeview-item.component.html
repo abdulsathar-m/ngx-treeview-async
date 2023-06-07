@@ -4,7 +4,7 @@
   </ng-template>
   <div *ngIf="!item.collapsed">
     <ngx-treeview-item [config]="config" *ngFor="let child of item.children" [item]="child" [template]="template"
-      (checkedChange)="onChildCheckedChange(child, $event)">
+      (checkedChange)="onChildCheckedChange(child, $event)" [loadChildren]="loadChildren">
     </ngx-treeview-item>
   </div>
 </div>

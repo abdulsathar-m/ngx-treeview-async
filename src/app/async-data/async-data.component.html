@@ -1,0 +1,21 @@
+<h3>Async Loading (
+  <a href="https://github.com/leovo2708/ngx-treeview/tree/master/src/app/product" target="_blank">source code</a>)</h3>
+<ul>
+  <li>Example of asynchrononously loading children upon clicking Expand</li>
+</ul>
+<div class="row">
+  <div class="col-6">
+    <div class="form-group">
+      <div class="d-inline-block">
+        <ngx-treeview [items]="items" [config]="config" (selectedChange)="values = $event"
+        [loadChildren]="_loadChildren">
+        </ngx-treeview>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="alert alert-success" role="alert">
+      Selected items: {{values}}
+    </div>
+  </div>
+</div>
